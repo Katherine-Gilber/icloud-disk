@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.id2.dao.filedao">
+    <!--查看有多少个相同名字相同类型的-->
+    <select id="checknum" resultType="Integer">
+        select COUNT(1)
+        from file where fileoriginalname=#{fileOriginalName} and filetype=#{fileType}
+    </select>
+    <!--上传文件时把文件信息传入-->
+    <insert id="uploadfile">
+	INSERT INTO file(filename,filetype,filesize,filepath,fileoriginalname,fileuser)
+	 VALUES(#{fileName},#{fileType},#{fileSize},#{filePath},#{fileOriginalName},#{fileUser})
+	</insert>
+
+    <!--获取文件总数-->
+    <select id="selectFilesCount" resultType="int">
+        select count(*) from file
+    </select>
+
+    <!--通过文件名排序-->
+    <select id="SortByName" parameterType="file" resultType="file">
+        select * from file
+        order by fileName
+    </select>
+
+
+    <!--通过文件大小排序-->
+
+    <select id="SortBySize" resultType="file">
+        select * from file
+        order by fileSize DESC
+    </select>
+
+    <!--通过文件创建时间排序-->
+
+    <select id="SortByTime" resultType="file">
+        select * from file
+        order by createTime DESC
+    </select>
+
+    <!--文件的模糊查询-->
+    <select id="searchfile" resultType="file">
+        select * from file
+        where DATE_FORMAT(createTime, '%Y-%m-%d') = DATE_FORMAT(#{createTime},'%Y-%m-%d')
+        <if test="fileName != null and fileName != ''">
+            <bind name="fileName" value="'%' +fileName + '%'"/>
+            or fileName like #{fileName}
+        </if>
+        <if test="fileUser != null and fileUser != ''">
+            <bind name="fileUser" value="'%' +fileUser + '%'"/>
+            or fileUser like #{fileUser}
+        </if>
+        order by file.createTime DESC
+    </select>
+
+    <!-- 查询文件信息 -->
+    <select id="selectFiles" resultType="file">select * from file </select>
+
+    <!-- 修改文件名字、路径、更新时间 -->
+    <update id= "renameFile">
+        update file set filename = #{fileName},filepath=#{filePath},updateTime=#{updateTime}
+        where id = #{fileId}
+    </update>
+
+    <!-- 查询文件重名的个数-->
+    <select id="fileNameDuplicate" resultType="int">
+        select COUNT(*) from file
+        where filename=#{fileName}
+    </select>
+
+    <!-- 删除文件 -->
+    <delete id="deletefile">
+        DELETE FROM file WHERE id = #{fileId}
+    </delete>
+
+    <!-- 查询文件信息 -->
+    <select id="selectFileById" resultType="file">select * from file  where id=#{id} </select>
+
+</mapper>

@@ -1,0 +1,154 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+#head{
+	width: auto;
+	height: 90px;
+	background-color: #00BFFF;
+	background-image: url(../img/cloud.png);
+}
+
+#left{
+	margin-top: 50px;
+	width: 210px;
+	height: auto;
+	float: left;
+	background-color: #f1f1f1;
+}
+
+#body3{
+	position: absolute;
+	width: 1300px;
+	height: 150px;
+	background-color: #E0ECFF;
+	left: 208px;
+	float:left;
+	border-top:0px solid ;
+	border-bottom:0px solid;
+	border-left: 0px solid;
+	border-right: 0px solid;
+	border-radius: 0px;
+}
+
+#up{
+	width: 100px;
+	height: 52px;
+	border-radius: 25px;
+	background:cornflowerblue;
+	font-size: 20px;
+	color: #FFF;
+	margin-top: 500px;
+	margin-left:50px;
+}
+
+.fil{
+	width: 57px;
+	height: 57px;
+	display: inline-block;
+	background: url(../img/file.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+#out{
+	font-size:20px
+}
+
+.filbutoom1{
+	width: 80px;
+	height: 32px;
+	background:rgb(59,140,255);
+	border: 0 none;
+	margin-top: 10px;
+	margin-left: 10px;
+	border-radius: 4px;
+	font-size: 16px;
+	color: #FFF;
+}
+
+.filbutoom2{
+	width: 106px;
+	height: 32px;
+	background:rgb(59,140,255);
+	border: 0 none;
+	margin-top: 10px;
+	margin-right: 10px;
+	border-radius: 4px;
+	font-size: 16px;
+	color: #FFF;
+}
+
+.filbutoom1:hover{
+	background:#00BFFF
+}
+
+#top{
+	width: auto;
+	height: 30px;
+}
+
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;}
+
+/* Style the tab */
+div.tabb {
+	float: left;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+	width: 100%;
+	height: 100%;
+}
+
+div.tabb2 {
+	float: left;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+	width: 100%;
+	height: 100%;
+}
+
+/* Style the buttons inside the tab */
+div.tabb button {
+	display: block;
+	background-color: inherit;
+	color: black;
+	padding: 22px 16px;
+	width: 100%;
+	border: none;
+	outline: none;
+	text-align: left;
+	cursor: pointer;
+	transition: 0.3s;
+	font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+div.tabb button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+div.tabb button.active {
+	background-color: #ccc;
+}
+
+#feli1{
+	margin-left: 10px;
+}
+
+#feli2{
+	margin-left:100px ;
+}
+
+#download{
+	display: none;
+}
+
+a {font-size:13px}
+
+a:link {color: blue; text-decoration:none;}
+
+a:active{color: red; }
+
+a:visited {color:purple;text-decoration:none;}

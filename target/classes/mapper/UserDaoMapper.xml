@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.id2.dao.UserDao">
+	<sql id="sql">
+		id,user,password,permissions
+	</sql>	
+	<!-- 登录 -->
+	<select id="selectuser" resultType="User">
+	select<include refid="sql"></include>
+	from user where user=#{userName} and password=#{userPwd}
+	
+	</select>
+
+	<!--查询有多少条记录-->
+	<select id="findAllRecord" parameterType="map" resultType="int">
+	select count(*) from user
+		<where>
+			<if test="userId != ''">
+				id = #{userId}
+			</if>
+			<if test="userName != ''">
+				and user like concat('%',#{userName},'%')
+			</if>
+			<if test="permissions != ''">
+				and permissions = #{permissions}
+			</if>
+			<if test="permissions == ''">
+				and permissions != 2
+			</if>
+		</where>
+	</select>
+	<!-- 分页查询 -->
+	<select id="findByPage" parameterType="map" resultType="User">
+		select * from user
+		<where>
+			<if test="userId != ''">
+				id = #{userId}
+			</if>
+			<if test="userName != ''">
+				and user like concat('%',#{userName},'%')
+			</if>
+			<if test="permissions != ''">
+				and permissions = #{permissions}
+			</if>
+			<if test="permissions == ''">
+				and permissions != 2
+			</if>
+		</where>
+		limit #{startIndex},#{rows}
+	</select>
+
+	<!-- 删除用户 -->
+	<delete id="deleteUsers">
+	DELETE FROM user WHERE user = #{userName}
+	</delete>
+
+	<!-- 更新用户 -->
+	<update id="updateUser">
+        UPDATE user
+        SET user= #{userName},password= #{password},permissions= #{permissions}
+        WHERE id= #{id}
+	</update>
+	<!-- 批量删除用户 -->
+	<delete id="deletUsers2">
+		delete  from  user where id in
+		<foreach item="id" collection="array" index="no" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 添加用户-->
+	<insert id="insertuser">
+	INSERT INTO user(user,password,permissions) VALUES(#{userName},#{userPwd},#{permissions})
+	</insert>
+
+	<!-- 验证添加的用户是否重名-->
+	<select id="Authenticate" resultType="User">
+		select<include refid="sql"></include>
+		from user where user=#{userName}
+	</select>
+
+</mapper>
